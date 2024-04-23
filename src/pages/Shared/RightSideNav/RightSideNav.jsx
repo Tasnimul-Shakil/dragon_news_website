@@ -1,5 +1,5 @@
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaGithub, FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import qZone1 from "../../../assets/qZone1.png"
 import qZone2 from "../../../assets/qZone2.png"
