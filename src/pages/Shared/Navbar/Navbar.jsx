@@ -31,7 +31,7 @@ const Navbar = () => {
           <img alt="Tailwind CSS Navbar component" src={userDefaultPicture} />
         </div>
     </div>
-    <Link>
+    <Link to='/login'>
         <button className="btn bg-black text-white hover:bg-[#dcdcdc] hover:text-black ">Login</button>
     </Link>
   </div>
