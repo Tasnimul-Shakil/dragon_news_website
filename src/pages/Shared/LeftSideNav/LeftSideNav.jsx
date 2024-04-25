@@ -14,11 +14,11 @@ const LeftSideNav = () => {
     },[])
     
     return (
-        <div className="space-y-10">
+        <div className="space-y-7 p-2 pt-4">
             <h1 className="text-xl font-semibold">All Category</h1>
             {
                 categories.map((category) => 
-                <NavLink className="block ml-4 text-[#9F9F9F] text-xl font-semibold px-4"
+                <NavLink className="block text-[#9F9F9F] font-semibold px-3"
                  key={category.id} to={`/category/${category.id}`}>{category.name}
                  </NavLink> )
             }

@@ -1,10 +1,16 @@
-import LoginPageImg from '../../assets/login_pic.png'
+import registerPageImg from '../../assets/register_image.png'
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { MdMailOutline, MdOutlinePassword } from "react-icons/md";
+import { SlPicture } from "react-icons/sl";
+import { MdMailOutline, MdOutlinePassword, MdDriveFileRenameOutline } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 const Register = () => {
+
+    const {createUser} = useContext(AuthContext)
+
     const navLinks = 
     <>
         <li className=" px-2"><NavLink to="/">Home</NavLink></li>
@@ -16,7 +22,20 @@ const Register = () => {
         e.preventDefault();
         console.log(e.currentTarget);
         const from = new FormData(e.currentTarget)
-        console.log(from.get('email'), from.get('password'));
+        const name = from.get('name')
+        const photo = from.get('photo')
+        const email = from.get('email')
+        const password = from.get('password')
+        console.log(photo, name, email, password);
+
+        createUser(email, password)
+            .then((result) => {
+                console.log(result.user);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+
     }
 
     return (
@@ -32,13 +51,13 @@ const Register = () => {
             </div>
             <div className="hero-content mx-auto flex-col gap-10 lg:flex-row">
                 <div className="hidden lg:block text-center">
-                    <img src={LoginPageImg} alt="" />
+                    <img src={registerPageImg} alt="" />
                 </div>
                 <div className=" w-full lg:w-1/2 lg:p-10">
                     <form onSubmit={handleRegister} className="">
-                        <h1 className='text-5xl pt-20 lg:pt-0 font-bold'>Sign In</h1>
+                        <h1 className='text-5xl pt-20 lg:pt-0 font-bold'>Register</h1>
                         <div className='pt-10'>
-                            <h2>Sign in with Open account</h2>
+                            <h2>Register with Open account</h2>
                             <div className="mb-6 flex gap-5">
                                 <button className="btn btn-outline mt-3">
                                     <FcGoogle className="text-xl"></FcGoogle>
@@ -51,9 +70,37 @@ const Register = () => {
                             </div>
                         </div>
                         <div className="form-control border-t-2 pt-2 mt-8">
-                            <h2>Or Continue with email address</h2>
+                            <h2>Or Register with email address</h2>
                             <label className="label">
-                                <span className="font-medium pt-2">Email</span>
+                                <span className="font-medium pt-1">Profile picture</span>
+                            </label>
+                            <div className="input input-bordered flex gap-2 items-center">
+                                <span className="text-sm text-[#ababab]">
+                                <SlPicture className="text-xl"></SlPicture>
+                                </span>
+                                <input 
+                                type="text"
+                                name="photo"
+                                placeholder="Add your profile picture"
+                                className='w-full' 
+                                required />
+                            </div>
+                            <label className="label">
+                                <span className="font-medium pt-1">Name</span>
+                            </label>
+                            <div className="input input-bordered flex gap-2 items-center">
+                                <span className="text-sm text-[#ababab]">
+                                <MdDriveFileRenameOutline className="text-xl"></MdDriveFileRenameOutline>
+                                </span>
+                                <input 
+                                type="text"
+                                name="name"
+                                placeholder="Add your Name to Register"
+                                className='w-full' 
+                                required />
+                            </div>
+                            <label className="label">
+                                <span className="font-medium pt-1">Email</span>
                             </label>
                             <div className="input input-bordered flex gap-2 items-center">
                                 <span className="text-sm text-[#ababab]">
@@ -69,7 +116,7 @@ const Register = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className=" font-medium pt-2">Password</span>
+                                <span className=" font-medium pt-1">Password</span>
                             </label>
                             <div className="input input-bordered flex gap-2 items-center">
                                 <span className="text-sm text-[#ababab]">
@@ -82,9 +129,6 @@ const Register = () => {
                                 className='w-full' 
                                 required />
                             </div>
-                            <label className="label">
-                                <a href="#" className=" pt-2 label-text link link-hover">Forgot password?</a>
-                            </label>
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary text-xl">Sign In</button>
@@ -92,7 +136,7 @@ const Register = () => {
                     </form>
                     <div className="pt-10">
                         <p className="label-text">Already have an account 
-                        <Link to='/login' className=' font-semibold link-hover'> Sign up</Link>
+                        <Link to='/login' className=' font-semibold link-hover'> Sign In</Link>
                         </p>
                     </div>
                 </div>

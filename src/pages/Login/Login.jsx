@@ -1,8 +1,10 @@
-import LoginPageImg from '../../assets/login_pic.png'
+import { useContext } from 'react';
+import LoginPageImg from '../../assets/login_image.png'
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { MdMailOutline, MdOutlinePassword } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from '../../Providers/AuthProvider';
 
 
 const Login = () => {
@@ -13,11 +15,22 @@ const Login = () => {
         <li className=" px-2"><NavLink to="/register">Register</NavLink></li>
         <li className=" px-2"><NavLink to="/login">Login</NavLink></li> 
     </>
+    const {signIn} =useContext(AuthContext);
+
     const handleLogin = e => {
         e.preventDefault();
         console.log(e.currentTarget);
         const from = new FormData(e.currentTarget)
-        console.log(from.get('email'), from.get('password'));
+        const email = from.get('email')
+        const password = from.get('password')
+        console.log(email, password);
+        signIn(email, password)
+        .then((result) => {
+             console.log(result.user);
+         })
+         .catch((error) => {
+             console.error(error);
+         })
     }
 
     return (
